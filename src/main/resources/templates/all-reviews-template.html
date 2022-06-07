@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Reviews Page</title>
+</head>
+
+<body>
+
+<h1>List Of All Reviews</h1>
+<table>
+    <tr>
+        <td>Title</td>
+        <td>Link</td>
+    </tr>
+    <tr th:each="review: ${allReviewsModel}">
+        <td><p th:text="${review.title}"></p></td>
+        <td><a th:href="@{'/single-review/'+${review.id}}" href="#">View Full Review</a></td>
+    </tr>
+</table>
+<!--<ul>-->
+<!--    <li th:each="review: ${allReviewsModel}" th:text="${review.title}">-->
+<!--        <a th:href="@{/single-review/${review.id}}">View Full Review</a>-->
+<!--    </li>-->
+</ul>
+</body>
+</html>
