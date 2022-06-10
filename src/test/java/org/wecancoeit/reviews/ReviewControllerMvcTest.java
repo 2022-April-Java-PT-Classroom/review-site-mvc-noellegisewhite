@@ -9,6 +9,9 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 
 import org.springframework.test.web.servlet.MockMvc;
+import org.wecancoeit.reviews.controller.ReviewController;
+import org.wecancoeit.reviews.model.Review;
+import org.wecancoeit.reviews.repository.ReviewRepository;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;

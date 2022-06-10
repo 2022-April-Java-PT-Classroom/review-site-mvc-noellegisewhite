@@ -1,14 +1,11 @@
-package org.wecancoeit.reviews;
+package org.wecancoeit.reviews.controller;
 
 import org.springframework.stereotype.Controller;
 import javax.annotation.Resource;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestParam;
-
+import org.wecancoeit.reviews.repository.ReviewRepository;
 
 @Controller
 public class ReviewController {
@@ -26,5 +23,11 @@ public class ReviewController {
     public String displaySingleReview(@PathVariable Long id, Model model) {
         model.addAttribute("singleReviewModel", reviewRepo.findOneReview(id));
         return ("single-review-template");
+    }
+
+    @PostMapping("/delete-review")
+    public String deleteReview(@RequestParam Long id) {
+        reviewRepo.removeReview(id);
+        return ("redirect:/all-reviews");
     }
 }

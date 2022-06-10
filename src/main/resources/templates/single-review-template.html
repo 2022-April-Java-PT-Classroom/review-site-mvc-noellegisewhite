@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="shortcut icon" type="image/png" href="/images/favicon.png">
     <title>Single Review Template</title>
 </head>
+
+<header>
+    <section>
+        <div class="copy-banner">
+            <p>This site is for educational purposes only. Stardew Valley references, content, and materials are
+                trademarks and/or copyrights of Stardew Valley, ConcernedApe, and/or its licensors. All rights
+                reserved.</p>
+        </div>
+    </section>
+    <nav>
+        <button><a href="/">Home Page</a></button>
+        <button><a href="/all-reviews">All Reviews</a></button>
+    </nav>
+    <h1 th:text="'Review Of Villager: ' + ${singleReviewModel.title}">Review Title</h1>
+</header>
+
 <body>
-<h1>This is a review</h1>
+<main>
+    <section class="review">
+        <div class="img-container">
+        <img th:src="${singleReviewModel.imgURL}"/>
+        <button class="category" th:text="${singleReviewModel.category}">Button</button>
+        </div>
+        <p th:text="${singleReviewModel.content}">Content</p>
+        <div class="tags-container">
+            <ul th:each="hashtags: ${singleReviewModel.hashtagsCollection}">
+                <li>
+                    <button th:text="${hashtags.hashName}"></button>
+                </li>
+            </ul>
+        </div>
+    </section>
+</main>
+<footer>
+    <p>&copy; Copyright Noelle Gisewhite</p>
+</footer>
 </body>
 </html>

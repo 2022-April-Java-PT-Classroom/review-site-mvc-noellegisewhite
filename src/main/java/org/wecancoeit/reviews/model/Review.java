@@ -1,10 +1,11 @@
-package org.wecancoeit.reviews;
+package org.wecancoeit.reviews.model;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class Review {
 
     // Variables
@@ -12,12 +13,13 @@ public class Review {
     @GeneratedValue
     private Long id;
     private String title;
+    @Lob
     private String imgURL;
     @Lob
     private String content;
     private String category;
     @ManyToMany
-    private Collection<Hashtags> hashtags;
+    private Collection<Hashtags> hashtagsCollection;
 
     // Getters
     public Long getId() {
@@ -40,8 +42,8 @@ public class Review {
         return category;
     }
 
-    public Collection<Hashtags> getHashtags() {
-        return hashtags;
+    public Collection<Hashtags> getHashtagsCollection() {
+        return hashtagsCollection;
     }
 
     // Constructors
@@ -56,18 +58,23 @@ public class Review {
         this.category = category;
     }
 
-    public Review(Long id, String title, String imgURL, String content, String category, Hashtags...hashtags) {
+    public Review(Long id, String title, String imgURL, String content, String category, Hashtags...hashtagsCollection) {
         this.id = id;
         this.title = title;
         this.imgURL = imgURL;
         this.content = content;
         this.category = category;
-        this.hashtags = List.of(hashtags);
+        this.hashtagsCollection = List.of(hashtagsCollection);
     }
 
     // Methods
     public void addOneHashtag(Hashtags hashtagsToAdd) {
-        hashtags.add(hashtagsToAdd);
+        hashtagsCollection.add(hashtagsToAdd);
+    }
+
+    public void addManyHashtags(Hashtags...hastagsToAdd) {
+        hashtagsCollection.addAll(List.of(hastagsToAdd));
+        Review appendReview = new Review(id, title, imgURL, content, category, hastagsToAdd);
     }
 
     @Override
@@ -78,7 +85,7 @@ public class Review {
                 ", imgURL='" + imgURL + '\'' +
                 ", content='" + content + '\'' +
                 ", category='" + category + '\'' +
-                ", hashtags=" + hashtags +
+                ", hashtags=" + hashtagsCollection +
                 '}';
     }
 
@@ -87,11 +94,11 @@ public class Review {
         if (this == o) return true;
         if (!(o instanceof Review)) return false;
         Review review = (Review) o;
-        return getId().equals(review.getId()) && getTitle().equals(review.getTitle()) && getImgURL().equals(review.getImgURL()) && getContent().equals(review.getContent()) && getCategory().equals(review.getCategory()) && getHashtags().equals(review.getHashtags());
+        return getId().equals(review.getId()) && getTitle().equals(review.getTitle()) && getImgURL().equals(review.getImgURL()) && getContent().equals(review.getContent()) && getCategory().equals(review.getCategory()) && getHashtagsCollection().equals(review.getHashtagsCollection());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getImgURL(), getContent(), getCategory(), getHashtags());
+        return Objects.hash(getId(), getTitle(), getImgURL(), getContent(), getCategory(), getHashtagsCollection());
     }
 }

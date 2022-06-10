@@ -1,6 +1,7 @@
-package org.wecancoeit.reviews;
+package org.wecancoeit.reviews.repository;
 
 import org.springframework.stereotype.Repository;
+import org.wecancoeit.reviews.model.Review;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -12,15 +13,8 @@ public class ReviewRepository {
     // Map
     Map<Long, Review> reviewList = new HashMap<>();
 
-    // Constructor + Populator
+    // Constructor
     public ReviewRepository() {
-        Review reviewOne = new Review(1L, "title 1", "image 1", "lorem ipsum lorem 1", "category 1");
-        Review reviewTwo = new Review(2L, "title 2", "image 2", "lorem ipsum lorem 2", "category 2");
-        Review reviewThree = new Review(3L, "title 3", "image 3", "lorem ipsum lorem 3", "category 3");
-
-        reviewList.put(reviewOne.getId(), reviewOne);
-        reviewList.put(reviewTwo.getId(), reviewTwo);
-        reviewList.put(reviewThree.getId(), reviewThree);
     }
 
     // Constructor + Method + Var(args)
@@ -31,11 +25,25 @@ public class ReviewRepository {
     }
 
     // Methods
-    public Review findOneReview(long reviewIdToFind) {
+    public Review findOneReview(Long reviewIdToFind) {
         return reviewList.get(reviewIdToFind);
     }
 
     public Collection<Review> findAllReviews() {
         return reviewList.values();
+    }
+
+    public void addReview(Review reviewToAdd) {
+        reviewList.put(reviewToAdd.getId(), reviewToAdd);
+    }
+
+    public void bulkAddReview(Review...reviewToAdd) {
+        for (Review reviewIndex : reviewToAdd) {
+            reviewList.put(reviewIndex.getId(), reviewIndex);
+        }
+    }
+
+    public void removeReview(Long reviewToRemove) {
+        reviewList.remove(reviewToRemove);
     }
 }

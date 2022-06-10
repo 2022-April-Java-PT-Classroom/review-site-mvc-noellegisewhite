@@ -2,6 +2,10 @@ package org.wecancoeit.reviews;
 
 import java.util.Collection;
 import org.junit.jupiter.api.Test;
+import org.wecancoeit.reviews.model.Hashtags;
+import org.wecancoeit.reviews.model.Review;
+import org.wecancoeit.reviews.repository.HashtagsRepository;
+import org.wecancoeit.reviews.repository.ReviewRepository;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -56,30 +60,45 @@ public class ReviewRepositoryTest {
     public void willFindOneHashtagForReviewOne() {
         ReviewRepository reviewRepoTest = new ReviewRepository(reviewOne);
         Review dummyReview = reviewRepoTest.findOneReview(1L);
-        assertThat(dummyReview.getHashtags(), contains(hashtagOne));
+        assertThat(dummyReview.getHashtagsCollection(), contains(hashtagOne));
     }
 
     @Test
     public void willFindOneHashtagForReviewTwo() {
         ReviewRepository reviewRepoTest = new ReviewRepository(reviewTwo);
         Review dummyReview = reviewRepoTest.findOneReview(2L);
-        assertThat(dummyReview.getHashtags(), contains(hashtagTwo));
+        assertThat(dummyReview.getHashtagsCollection(), contains(hashtagTwo));
     }
 
     @Test
     public void willFindThreeHashtagsForReviewThree() {
         ReviewRepository reviewRepoTest = new ReviewRepository(reviewThree);
         Review dummyReview = reviewRepoTest.findOneReview(3L);
-        assertThat(dummyReview.getHashtags(), containsInAnyOrder(hashtagOne, hashtagTwo, hashtagThree));
+        assertThat(dummyReview.getHashtagsCollection(), containsInAnyOrder(hashtagOne, hashtagTwo, hashtagThree));
+    }
+
+    @Test
+    public void willAddTwoHashtagsToHashtagRepository() {
+        HashtagsRepository hashtagsTest = new HashtagsRepository(hashtagOne);
+        hashtagsTest.addHashtags(hashtagTwo, hashtagThree);
+        assertThat(hashtagsTest.findAllHashtags(), containsInAnyOrder(hashtagOne, hashtagTwo, hashtagThree));
     }
 
 //    // My brain hurts...not sure why I can't get this to work. Maybe this is a controller test.
 //    @Test
 //    public void willAddOneHashtagToReviewOne() {
-//        HashtagsRepository hashtagsTest = new HashtagsRepository(hashtagOne, hashtagTwo, hashtagThree);
 //        ReviewRepository reviewRepoTest = new ReviewRepository(reviewOne);
 //        Review dummyReview = reviewRepoTest.findOneReview(1L);
 //        dummyReview.addOneHashtag(hashtagThree);
-//        assertThat(dummyReview.getHashtags(), containsInAnyOrder(hashtagThree, hashtagOne));
+//        dummyReview.getHashtagsCollection().add(hashtagThree);
+//        assertThat(dummyReview.getHashtagsCollection(), containsInAnyOrder(hashtagThree, hashtagOne));
 //    }
+
+    @Test
+    public void willRemoveReviewFiveFromMap() {
+        ReviewRepository reviewRepoTest = new ReviewRepository(reviewThree, reviewFour, reviewFive, reviewSix);
+        reviewRepoTest.removeReview(4L);
+        Collection<Review> reviewCollection = reviewRepoTest.findAllReviews();
+        assertThat(reviewCollection.size(), is(3));
+    }
 }
