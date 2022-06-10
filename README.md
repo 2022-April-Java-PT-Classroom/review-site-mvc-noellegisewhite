@@ -33,7 +33,7 @@ This review site is an exercise in Spring JPA + MVC framework.
 
 ### Click To Play
 
-<a href="https://youtu.be/WiNTFBfGXio"><img src="src/main/resources/static/images/video-player.png"></a>
+<a href="https://youtu.be/WiNTFBfGXio" target="_blank"><img src="src/main/resources/static/images/video-player.png"></a>
 
 ## Checklists
 
