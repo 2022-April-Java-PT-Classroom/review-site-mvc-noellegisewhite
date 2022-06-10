@@ -31,8 +31,6 @@ This review site is an exercise in Spring JPA + MVC framework.
 
 ## Demo & Screenshots
 
-<video src="../video/Review Site - June 2022.wmv"/>
-
 ## Checklists
 
 Review Site - Stretch Goals
