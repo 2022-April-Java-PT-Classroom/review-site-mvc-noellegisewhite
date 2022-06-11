@@ -36,6 +36,12 @@ p {
     padding: 10px;
 }
 
+.im-but-a-humble-peasant {
+    line-height: 0.1;
+    font-size: 8px;
+    text-align: center;
+}
+
 nav {
     background-color: none;
     height: 60px;
@@ -73,6 +79,20 @@ button a {
     background-color: none;
     text-decoration: none;
     font-color: black;
+}
+
+.summary-container {
+    background-color: #FFFFCC;
+    border: 8px solid transparent;
+    border-radius: 10px;
+    border-image: url('../images/border.png') 30% stretch;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.ok-but-why-am-i-like-this {
+    text-decoration: line-through;
+    color: #F8F3B4;
 }
 
 .form-container {
