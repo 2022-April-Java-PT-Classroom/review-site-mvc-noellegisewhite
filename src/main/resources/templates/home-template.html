@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="shortcut icon" type="image/png" href="/images/favicon.png">
+    <title>Noelle Gisewhite Review Site</title>
+</head>
+
+<header>
+    <section>
+        <div class="copy-banner">
+            <p>This site is for educational purposes only. Stardew Valley references, content, and materials are
+                trademarks and/or copyrights of Stardew Valley, ConcernedApe, and/or its licensors. All rights
+                reserved.</p>
+            <p class="im-but-a-humble-peasant">Please don't sue me T.T</p>
+        </div>
+    </section>
+    <nav>
+        <button><a href="/">Home Page</a></button>
+        <button><a href="/all-reviews">All Reviews</a></button>
+    </nav>
+    <h1>Welcome To Stardew Valley Villager Review</h1>
+</header>
+
+<body>
+<main>
+    <div class="summary-container">
+        <p>"Stardew Valley is an open-ended country-life RPG! You’ve inherited your grandfather’s old farm plot in Stardew Valley. Armed with hand-me-down tools and a few coins, you set out to begin your new life. Can you learn to live off the land and turn these overgrown fields into a thriving home? It won’t be easy"</p>
+        <p>I've recently started playing Stardew Valley again. And because <span class="ok-but-why-am-i-like-this">farming virtual plants and developing attachments to fictional characters helps me cope with my crippling depression</span> of the community surrounding the game and rich the storyline, I decided to create reviews of the people of Pelican Town. (Or at least the bachelors for now).</p>
+    </div>
+    <div class="form-container">
+        <form name="addReview" action="/addReview" th:object="${oneReview}" method="post">
+            <fieldset>
+                <legend>Add A New Villager</legend>
+                <input type="number" class="text-field" name="id" id="id" placeholder="ID Number"/>
+                <input type="text" class="text-field" name="title" id="title" placeholder="Villager Name"/>
+                <input type="text" class="text-field" name="imgURL" id="imgURL" placeholder="Image URL"/>
+                <input type="text" class="text-field text-field__content" name="content" id="content"
+                       placeholder="Description"/>
+                <input type="text" class="text-field" name="category" id="category" placeholder="Category"/>
+                <h2>Hashtags</h2>
+                <p>I tried for hours to get this to work, but it doesn't :( <br>See ReadMe for failure documentation if
+                    you'd like.</br></p>
+                <div th:each="singleTag: ${allTags}">
+                    <input type="checkbox" th:value="${singleTag.hashId}">
+                    <label th:text="${singleTag.hashName}"></label>
+                </div>
+                <button>Submit Review</button>
+            </fieldset>
+        </form>
+    </div>
+<!--    <section>-->
+<!--        <ul th:each="singleTag: ${allTags}">-->
+<!--            <li th:text="${singleTag.hashName}" th:href="@{'/single-review/'+${review.id}}"></li>-->
+<!--        </ul>-->
+<!--    </section>-->
+</main>
+<footer>
+    <p>&copy; Copyright Noelle Gisewhite</p>
+</footer>
+</body>
+</html>

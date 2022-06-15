@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="shortcut icon" type="image/png" href="/images/favicon.png">
+
+    <title>All Reviews Page</title>
+</head>
+
+<header>
+    <section>
+        <div class="copy-banner">
+            <p>This site is for educational purposes only. Stardew Valley references, content, and materials are
+                trademarks and/or copyrights of Stardew Valley, ConcernedApe, and/or its licensors. All rights
+                reserved.</p>
+        </div>
+    </section>
+    <nav>
+        <button><a href="/">Home Page</a></button>
+        <button><a href="/all-reviews">All Reviews</a></button>
+    </nav>
+    <h1>List Of All Villager Reviews</h1>
+</header>
+
+<body>
+<table>
+    <tr class="table-header">
+        <td>Review ID</td>
+        <td>Title</td>
+        <td>Link</td>
+        <td>Delete</td>
+    </tr>
+    <tr th:each="review: ${allReviewsModel}">
+        <td><p th:text="${review.id}"></p></td>
+        <td><p th:text="${review.title}"></p></td>
+        <td>
+            <button><a th:href="@{'/single-review/'+${review.id}}" href="#">View Full Review</a></button>
+        </td>
+        <td>
+            <form action="/delete-review" method="post">
+                <input type="hidden" name="id" th:value="${review.id}">
+                <button>Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<!--<section>-->
+<!--    <ul th:each="review: ${allReviewsModel}">-->
+<!--        <li><button><a th:href="@{'/single-review/'+${review.id}}" href="#"><p th:text="${review.title}"</p></a></button></li>-->
+<!--    </ul>-->
+<!--</section>-->
+
+<footer>
+    <p>&copy; Copyright Noelle Gisewhite</p>
+</footer>
+</body>
+</html>
